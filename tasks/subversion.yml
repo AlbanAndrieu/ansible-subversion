@@ -70,7 +70,7 @@
   tags: configure
 
 - name: Copy the subversion configuration script
-  template: src=config.j2 dest={{ subversion_merge_tool_cmd_directory }}/config mode=0644
+  template: src=config.j2 dest={{ subversion_config_dir }}/config mode=0644
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'    
   tags: configure
 

@@ -19,7 +19,7 @@ subversion_revision : '8'
 subversion_version : "{{subversion_major}}.{{subversion_minor}}.{{subversion_revision}}"
 subversion_ubuntu: '{{ subversion_version }}-1ubuntu3.1'
 
-subversion_config_dir : '.subversion'
+subversion_config_dir : '~/.subversion'
 #use meld or xxdiff-subversion or xx-diff-proxy 
 subversion_diff_cmd: meld
 subversion_merge_tool_cmd_directory: /usr/bin/
