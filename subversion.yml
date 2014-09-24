@@ -5,6 +5,8 @@
     - ansible-subversion
     
   vars:
+      user: root
+      home: /root
       subversion_previous_enabled: true   
       subversion_previous_codename: precise
       subversion_rabbitvcs_enabled: no
