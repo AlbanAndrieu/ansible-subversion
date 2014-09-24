@@ -24,7 +24,7 @@ subversion_owner                         : "{{ user }}"
 subversion_group                         : "{{ subversion_owner }}"
 home                                     : '~' #please override me
 subversion_owner_home                    : "{{ home }}"
-subversion_config_dir                    : "{[ subversion_owner_home }}/.subversion"
+subversion_config_dir                    : "{{ subversion_owner_home }}/.subversion"
 #use meld or xxdiff-subversion or xx-diff-proxy 
 subversion_diff_cmd                      : meld
 subversion_merge_tool_cmd_directory      : /usr/bin/
