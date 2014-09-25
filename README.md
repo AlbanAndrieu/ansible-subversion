@@ -1,14 +1,17 @@
-# ansible-subversion
+ansible-subversion
+====================
 
 A role for installing subversion.
 
+[![Build Status](https://api.travis-ci.org/AlbanAndrieu/ansible-subversion.png?branch=master)](https://travis-ci.org/AlbanAndrieu/ansible-subversion)
 
 ## Actions
 
 - Ensures that subversion is installed (using `apt`)
 
+Usage example
+------------
 
-## Usage:
 ```
   - name: Install subversion
     hosts: subversion
@@ -32,6 +35,17 @@ A role for installing subversion.
       
 ```
 
-## License
+Requirements
+------------
+
+none
+
+Dependencies
+------------
+
+none
+
+License
+-------
 
 MIT

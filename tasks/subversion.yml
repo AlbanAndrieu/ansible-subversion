@@ -1,7 +1,7 @@
 ---
 # This playbook contains common plays that will be run on all nodes.
 
-- name:  Uuninstall subversion packages
+- name:  Uninstall subversion packages
   apt: >
     pkg={{ item }} 
     state=absent
