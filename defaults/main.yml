@@ -1,7 +1,7 @@
 ---
 subversion_enabled: yes                       # Enable module
 
-subversion_previous_enabled: yes                       # Enable for subversion 1.6
+subversion_previous_enabled: yes              # Enable for subversion 1.6
 #subversion_previous_codename: {{ ansible_lsb.codename }}
 subversion_previous_codename: precise
 
@@ -36,3 +36,4 @@ subversion_merge_tool_cmd: "{{ subversion_diff3_cmd }}"
 #subversion_merge_tool_cmd: svn-merge-meld.py
 
 subversion_rabbitvcs_enabled: yes                       # Enable module
+subversion_diff_enabled: yes                            # Enable module
