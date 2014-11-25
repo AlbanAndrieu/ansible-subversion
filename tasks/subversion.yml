@@ -80,7 +80,8 @@
     group="{{subversion_group}}"
 #  ignore_errors: true
   tags: configure
-
+  when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and subversion_diff_enabled
+  
 - name: Copy the subversion configuration script
   template: src=config.j2 dest={{ subversion_config_dir }}/config mode=0644
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and subversion_diff_enabled
