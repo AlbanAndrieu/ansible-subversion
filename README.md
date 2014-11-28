@@ -1,8 +1,16 @@
-## subversion
+## alban.andrieu.subversion
 
-  [![Platforms](http://img.shields.io/badge/platforms-ubuntu-lightgrey.svg?style=flat)](#)
+[![Travis CI](http://img.shields.io/travis/AlbanAndrieu/ansible-subversion.svg?style=flat)](http://travis-ci.org/AlbanAndrieu/ansible-subversion) [![Branch](http://img.shields.io/github/tag/AlbanAndrieu/ansible-subversion.svg?style=flat-square)](https://github.com/AlbanAndrieu/ansible-subversion/tree/master) [![Donate](https://img.shields.io/gratipay/AlbanAndrieu.svg?style=flat)](https://www.gratipay.com/AlbanAndrieu)  [![Ansible Galaxy](http://img.shields.io/badge/galaxy-alban.andrieu.subversion-blue.svg?style=flat)](https://galaxy.ansible.com/list#/roles/1511) [![Platforms](http://img.shields.io/badge/platforms-ubuntu-lightgrey.svg?style=flat)](#)
 
+Ensures that subversion is installed (using `apt`)
 
+### Installation
+
+This role requires at least Ansible `v1.6.3`. 
+
+To install it, run:
+
+    ansible-galaxy install alban.andrieu.subversion
 
 
 
@@ -11,10 +19,10 @@
 List of default variables available in the inventory:
 
 ```yaml
-    ---
+        ---
     subversion_enabled: yes                       # Enable module
     
-    subversion_previous_enabled: yes                       # Enable for subversion 1.6
+    subversion_previous_enabled: yes              # Enable for subversion 1.6
     #subversion_previous_codename: {{ ansible_lsb.codename }}
     subversion_previous_codename: precise
     
@@ -49,15 +57,21 @@ List of default variables available in the inventory:
     #subversion_merge_tool_cmd: svn-merge-meld.py
     
     subversion_rabbitvcs_enabled: yes                       # Enable module
+    subversion_diff_enabled: yes                            # Enable module
 ```
 
 
+### Detailed usage guide
+
+Run the following command :
+
+`ansible-playbook -i hosts -c local -v subversion.yml -vvvv --ask-sudo-pass | tee setup.log`
 
 
 ### Authors and license
 
-`subversion` role was written by:
-- [Alban Andrieu](nabla.mobi) | [e-mail](mailto:alban.andrieu@free.fr) | [Twitter](https://twitter.com/AlbanAndrieu)
+`alban.andrieu.subversion` role was written by:
+- [Alban Andrieu](fr.linkedin.com/in/nabla/) | [e-mail](mailto:alban.andrieu@free.fr) | [Twitter](https://twitter.com/AlbanAndrieu) | [GitHub](https://github.com/AlbanAndrieu)
 - License: [GPLv3](https://tldrlegal.com/license/gnu-general-public-license-v3-%28gpl-3%29)
 
 ### Feedback, bug-reports, requests, ...
