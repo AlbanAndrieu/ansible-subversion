@@ -25,7 +25,7 @@ galaxy_info:
 
 ansigenome_info:
   galaxy_id: '1511'
-  galaxy_user:  'alban.andrieu'  
+  galaxy_user: 'alban.andrieu'
   galaxy_name: 'subversion'
   
   travis: True
