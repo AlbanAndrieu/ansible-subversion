@@ -19,12 +19,7 @@ To install it, run:
 List of default variables available in the inventory:
 
 ```yaml
-<<<<<<< HEAD
-        ---
     subversion_enabled: yes                       # Enable module
-=======
-        subversion_enabled: yes                       # Enable module
->>>>>>> Fixe
     
     subversion_previous_enabled: yes              # Enable for subversion 1.6
     #subversion_previous_codename: {{ ansible_lsb.codename }}
