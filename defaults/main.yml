@@ -16,7 +16,7 @@ subversion_major: '1'
 subversion_minor: '8'
 subversion_revision: '8'
 subversion_version: "{{subversion_major}}.{{subversion_minor}}.{{subversion_revision}}"
-subversion_ubuntu: '{{ subversion_version }}-1ubuntu3.1'
+subversion_ubuntu: '{{ subversion_version }}-1ubuntu3.2'
 
 #user: 'albandri' #please override me
 user: "{{ lookup('env','USER') }}"
@@ -26,7 +26,7 @@ subversion_group: "{{ subversion_owner }}"
 home: "{{ lookup('env','HOME') }}"
 subversion_owner_home: "{{ home }}"
 subversion_config_dir: "{{ subversion_owner_home }}/.subversion"
-#use meld or xxdiff-subversion or xx-diff-proxy 
+#use meld or xxdiff-subversion or xx-diff-proxy
 subversion_diff_cmd: meld
 subversion_merge_tool_cmd_directory: /usr/bin/
 subversion_merge_tool_file: "svn-merge-meld.sh"
