@@ -2,7 +2,8 @@ subversion_enabled: yes                       # Enable module
 
 subversion_previous_enabled: yes              # Enable for subversion 1.6
 #subversion_previous_codename: {{ ansible_lsb.codename }}
-subversion_previous_codename: precise
+#subversion_previous_codename: precise
+subversion_previous_codename: trusty
 
 #Ubuntu 13
 #subversion_major: '1'
