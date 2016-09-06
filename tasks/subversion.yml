@@ -54,15 +54,20 @@
   with_items:
    - subversion={{subversion_ubuntu}}
 
-- name: Install diff tools
+- name: Install xxdiff diff tools
+  action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ util_pkg_state|default('present') }}"
+  become: yes
+  when: ( ansible_distribution_release != 'trusty' ) and subversion_diff_enabled
+  tags: package
+  with_items:
+   - xxdiff
+
+- name: Install meld diff tools
   action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ util_pkg_state|default('present') }}"
   become: yes
   when: subversion_diff_enabled
   tags: package
   with_items:
-   - xxdiff
-#   - xxdiff-scripts
-#  - kdiff3
    - meld
 
 - name: Copy the subversion configuration merge script
