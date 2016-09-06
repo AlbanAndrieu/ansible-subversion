@@ -7,7 +7,7 @@
     state=absent
     purge=yes
     force=yes
-  sudo : yes
+  become: yes
   with_items:
     - libsvn1
     - subversion
@@ -16,7 +16,7 @@
   action: shell echo a$(cat /etc/apt/sources.list | grep $(echo   'http://extras.ubuntu.com/ubuntu' | tr "[:upper:]" "[:lower:]"  ))
   register: sources_subversion1
   ignore_errors: true
-  sudo : yes
+  become: yes
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and subversion_previous_enabled
 
 - debug: msg="sources_subversion1 value is {{ sources_subversion1.stdout }} "
@@ -24,14 +24,14 @@
 
 - name: Adding source.
   action: shell echo "deb http://extras.ubuntu.com/ubuntu {{ subversion_previous_codename }} main" | tr "[:upper:]" "[:lower:]" >> /etc/apt/sources.list
-  sudo : yes
+  become: yes
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and sources_subversion1.stdout == 'a' and subversion_previous_enabled
 
 - name: Checking if Sources are Available
   action: shell echo a$(cat /etc/apt/sources.list | grep $(echo   'http://us.archive.ubuntu.com/ubuntu/' | tr "[:upper:]" "[:lower:]"  ))
   register: sources_subversion2
   ignore_errors: true
-  sudo : yes
+  become: yes
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and subversion_previous_enabled
 
 - debug: msg="sources_subversion2 value is {{ sources_subversion2.stdout }} "
@@ -39,27 +39,25 @@
 
 - name: Adding source.
   action: shell echo "deb http://us.archive.ubuntu.com/ubuntu/ {{ subversion_previous_codename }} main universe restricted multiverse" | tr "[:upper:]" "[:lower:]" >> /etc/apt/sources.list
-  sudo : yes
+  become: yes
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and sources_subversion2.stdout == 'a' and subversion_previous_enabled
 
 - name: Install subversion package
-  action: apt pkg='libsvn1={{subversion_ubuntu}}' state=installed update_cache=yes
-  sudo : yes
-  when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
+  action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ util_pkg_state|default('present') }}"
+  become: yes
+  with_items:
+   - libsvn1={{subversion_ubuntu}}
 
 - name: Install subversion package
-  action: apt pkg='subversion={{subversion_ubuntu}}' state=installed
-  sudo : yes
-  when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
-
-- name: Install subversion package
-  action: yum name='subversion' state=installed
-  when: (ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux')
+  action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ util_pkg_state|default('present') }}"
+  become: yes
+  with_items:
+   - subversion={{subversion_ubuntu}}
 
 - name: Install diff tools
-  apt: pkg={{ item }} state=present update_cache=yes
-  sudo : yes
-  when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and subversion_diff_enabled
+  action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ util_pkg_state|default('present') }}"
+  become: yes
+  when: subversion_diff_enabled
   tags: package
   with_items:
    - xxdiff
@@ -88,8 +86,8 @@
   tags: configure
 
 - name: Install rabbitvcs tools
-  apt: pkg={{ item }} state=present update_cache=yes
-  sudo : yes
+  action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ util_pkg_state|default('present') }}"
+  become: yes
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and subversion_rabbitvcs_enabled
   tags: package
   with_items:
