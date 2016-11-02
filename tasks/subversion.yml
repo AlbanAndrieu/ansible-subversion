@@ -99,3 +99,4 @@
    - rabbitvcs-nautilus
    - rabbitvcs-gedit
 
+#See https://docs.ansible.com/ansible/subversion_module.html
