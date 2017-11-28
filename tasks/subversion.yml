@@ -1,7 +1,7 @@
 ---
 # This playbook contains common plays that will be run on all nodes.
 
-- name:  Uninstall subversion packages
+- name: Uninstall subversion packages
   apt: >
     pkg={{ item }}
     state=absent
@@ -45,20 +45,20 @@
 - name: Install subversion package
   action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ util_pkg_state|default('present') }}"
   with_items:
-   - libsvn1{{subversion_ubuntu}}
+   - "libsvn1{{ subversion_ubuntu }}"
   become: yes  
   ignore_errors: true
   
 - name: Install subversion package
   action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ util_pkg_state|default('present') }}"
   with_items:
-   - subversion{{subversion_ubuntu}}
+   - "subversion{{ subversion_ubuntu }}"
   become: yes  
   ignore_errors: true
   
 - name: Install xxdiff diff tools
   action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ util_pkg_state|default('present') }}"
-  when: ( ansible_distribution_release != 'trusty' ) and subversion_diff_enabled
+  when: (ansible_distribution_release != 'trusty') and subversion_diff_enabled
   tags: package
   with_items:
    - xxdiff
