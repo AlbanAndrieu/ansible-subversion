@@ -12,8 +12,8 @@
       subversion_previous_enabled: true
       subversion_previous_codename: precise
       subversion_rabbitvcs_enabled: no
-      subversion_major    : '1'
-      subversion_minor    : '8'
-      subversion_revision : '8'
-      subversion_version : "{{subversion_major}}.{{subversion_minor}}.{{subversion_revision}}"
-      subversion_ubuntu: '{{ subversion_version }}-1ubuntu3.2'
+#      subversion_major    : '1'
+#      subversion_minor    : '8'
+#      subversion_revision : '8'
+#      subversion_version : "{{subversion_major}}.{{subversion_minor}}.{{subversion_revision}}"
+#      subversion_ubuntu: '={{ subversion_version }}-1ubuntu3.2'
