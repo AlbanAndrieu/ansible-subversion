@@ -19,6 +19,8 @@ subversion_previous_codename: trusty
 #subversion_version: "{{subversion_major}}.{{subversion_minor}}.{{subversion_revision}}"
 #subversion_ubuntu: '={{ subversion_version }}-1ubuntu3.2'
 
+subversion_ubuntu: ''
+
 #user: 'albandri' #please override me
 user: "{{ lookup('env','USER') }}"
 subversion_owner: "{{ user }}"
