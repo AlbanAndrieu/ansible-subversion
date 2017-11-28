@@ -11,26 +11,26 @@
     - libsvn1
     - subversion
   become: yes
-  
+
 - name: Checking if Sources are Available
   action: shell echo a$(cat /etc/apt/sources.list | grep $(echo   'http://extras.ubuntu.com/ubuntu' | tr "[:upper:]" "[:lower:]"  ))
   register: sources_subversion1
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and subversion_previous_enabled
   become: yes
-  ignore_errors: true  
-  
+  ignore_errors: true
+
 - debug: msg="sources_subversion1 value is {{ sources_subversion1.stdout }} "
   when: subversion_previous_enabled
 
 - name: Adding source.
   action: shell echo "deb http://extras.ubuntu.com/ubuntu {{ subversion_previous_codename }} main" | tr "[:upper:]" "[:lower:]" >> /etc/apt/sources.list
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and sources_subversion1.stdout == 'a' and subversion_previous_enabled
-  become: yes  
+  become: yes
 
 - name: Checking if Sources are Available
   action: shell echo a$(cat /etc/apt/sources.list | grep $(echo   'http://us.archive.ubuntu.com/ubuntu/' | tr "[:upper:]" "[:lower:]"  ))
   register: sources_subversion2
-  when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and subversion_previous_enabled  
+  when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and subversion_previous_enabled
   ignore_errors: true
   become: yes
 
@@ -41,39 +41,38 @@
   action: shell echo "deb http://us.archive.ubuntu.com/ubuntu/ {{ subversion_previous_codename }} main universe restricted multiverse" | tr "[:upper:]" "[:lower:]" >> /etc/apt/sources.list
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and sources_subversion2.stdout == 'a' and subversion_previous_enabled
   become: yes
-  
+
 - name: Install subversion package
   action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ util_pkg_state|default('present') }}"
   with_items:
    - "libsvn1{{ subversion_ubuntu }}"
-  become: yes  
+  become: yes
   ignore_errors: true
-  
+
 - name: Install subversion package
   action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ util_pkg_state|default('present') }}"
   with_items:
    - "subversion{{ subversion_ubuntu }}"
-  become: yes  
-  ignore_errors: true
-  
+  become: yes
+
 - name: Install xxdiff diff tools
   action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ util_pkg_state|default('present') }}"
   when: (ansible_distribution_release != 'trusty') and subversion_diff_enabled
   tags: package
   with_items:
    - xxdiff
-  become: yes  
+  become: yes
   ignore_errors: true
-  
+
 - name: Install meld diff tools
   action: "{{ ansible_pkg_mgr}} name={{ item }} state={{ util_pkg_state|default('present') }}"
   when: subversion_diff_enabled
   tags: package
   with_items:
    - meld
-  become: yes  
+  become: yes
   ignore_errors: true
-  
+
 - name: Copy the subversion configuration merge script
   template: src={{ subversion_merge_tool_file }}.j2 dest={{ subversion_merge_tool_cmd }} mode=0755
   when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu') and subversion_diff_enabled
